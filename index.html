@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موقع شحن العاب الكترونية</title>
+
+<!-- خط Cairo -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- أيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+    <h1><i class="fa-solid fa-bolt"></i> بهاء الدين</h1>
+    <nav>
+        <a href="#">نبذة</a>
+        <a href="#skills">مهارات</a>
+        <a href="#projects">أعمال</a>
+        <a href="https://www.facebook.com/share/1HbLSKQszh/">فيس بوك</a>
+        <a href="#contact">تواصل</a>
+    </nav>
+    <div class="header-buttons">
+        <a href="login.html" class="btn-small"> تسجيل دخول</a>
+        <a href="sinup.html" class="btn-small">انشاء حساب</a>
+        <button id="modeBtn"><i class="fa-solid fa-moon"></i></button>
+    </div>
+</header>
+
+<!-- ===== هيرو ===== -->
+<div class="hero">
+    <h2>موقع شحن العاب إلكترونية</h2>
+    <p>
+        شحن العاب وبطاقات هدايا- شحن تطبيقات وإشتراكات- شحن بطاقات جوجل-شحن فيزا ومحافظ الكترونية</p>
+    <button class="btn-main" onclick="document.getElementById('freefire').scrollIntoView({behavior:'smooth'})">شاهد العروض المميزة</button>
+</div>
+
+<!-- ===== نبذة ===== -->
+<section id="about">
+    <h3><i class="fa-solid fa-user"></i> نبذة عني</h3>
+    <div class="card">
+        أنا <strong>بهاء الدين</strong>، مطور محترف متخصص في الذكاء الاصطناعي والبرمجة.
+        أجيد Python, JavaScript, C++, Java.
+        أعمل على بناء شبكات عصبية وأنظمة تعلم ذاتي.
+    </div>
+</section>
+
+<!-- ===== المهارات ===== -->
+<section id="skills">
+    <h3><i class="fa-solid fa-code"></i> مهاراتي</h3>
+    <div class="skills">
+        <div class="skill">HTML / CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+        <div class="skill">Firebase</div>
+        <div class="skill">AI Development</div>
+        <div class="skill">Neural Networks</div>
+        <div class="skill">C++</div>
+        <div class="skill">Java</div>
+    </div>
+</section>
+
+<!-- ===== الأعمال ===== -->
+<section id="projects">
+    <h3><i class="fa-solid fa-folder"></i> أعمالي</h3>
+    <div class="projects">
+        <div class="project">
+            <h4>مشروع ذكاء اصطناعي</h4>
+            <p>بوت متعلم يفهم اللغة العربية ويتطور حسب المستخدم.</p>
+        </div>
+        <div class="project">
+            <h4>موقع تجارة إلكترونية</h4>
+            <p>واجهة كاملة + لوحة تحكم + ربط قواعد بيانات.</p>
+        </div>
+        <div class="project">
+            <h4>بوت محادثة</h4>
+            <p>روبوت دردشة متصل بـ Firebase يتعلم من الأخطاء.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== فري فاير - قسم الشحن ===== -->
+<section id="freefire">
+    <h3><i class="fa-solid fa-gem"></i> شحن جواهر — Free Fire</h3>
+
+    <div class="ff-section">
+        <p style="color:#dcd0ff; margin:6px 0 14px 0;">
+            اختر الباقة المناسبة وأكمل بيانات اللاعب (UID) وطريقة الدفع. الباقات معروضة أدناه — تم إضافة باقة
+            <strong>100 جوهرة + 10 مجانية</strong> بالسعر الذي طلبته.
+        </p>
+
+        <div class="ff-grid">
+            <!-- بطاقة الشحن المطلوبة -->
+            <div class="ff-card" data-pack-id="ff-110-3650" data-gems="110" data-price="3650">
+                <div class="title">
+                    <h4>باقة خاصة — 100 + 10 مجانية</h4>
+                    <span style="font-size:12px; color:#ffd;">الأكثر مبيعاً</span>
+                </div>
+                <div class="gems">110 جوهرة</div>
+                <div class="price">السعر: <strong>3650 ج.س</strong></div>
+                <p>الحصول على 100 جوهرة + 10 جوهرات مجانية مباشرة داخل حسابك في فري فاير.</p>
+                <div class="buy">
+                    <div class="info">شحن فوري بعد الدفع</div>
+                    <button class="buy-btn" onclick="openPurchaseModal(this.closest('.ff-card'))"><i class="fa-solid fa-cart-shopping"></i>  شراء</button>
+                </div>
+            </div>
+
+            <!-- أمثلة باقات إضافية (اختياري) -->
+            <div class="ff-card" data-pack-id="ff-50-1800" data-gems="55" data-price="1800">
+                <div class="title"><h4>باقة 50 + 5 مجانية</h4></div>
+                <div class="gems">55 جوهرة</div>
+                <div class="price">السعر: <strong>1800 ج.س</strong></div>
+                <p>باقة مناسبة للتجربة أو الهدايا.</p>
+                <div class="buy">
+                    <div class="info">تسليم سريع</div>
+                    <button class="buy-btn" onclick="openPurchaseModal(this.closest('.ff-card'))"><i class="fa-solid fa-cart-shopping"></i>  شراء</button>
+                </div>
+            </div>
+
+            <div class="ff-card" data-pack-id="ff-250-8500" data-gems="250" data-price="8500">
+                <div class="title"><h4>باقة 250 جوهرة</h4></div>
+                <div class="gems">250 جوهرة</div>
+                <div class="price">السعر: <strong>8500 ج.س</strong></div>
+                <p>للاعبين الجادين — خصم مناسب للكميات الكبيرة.</p>
+                <div class="buy">
+                    <div class="info">قابل للتفاوض للكميات</div>
+                    <button class="buy-btn" onclick="openPurchaseModal(this.closest('.ff-card'))"><i class="fa-solid fa-cart-shopping"></i>  شراء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ملاحظة / شروط -->
+    <div class="card" style="margin-top:16px;">
+        <strong>ملاحظة مهمة:</strong> هذه الصفحة تعرض واجهة تجريبية لعملية الشراء. لربطها بالمدفوعات الحقيقية تحتاج إلى:
+        <ol style="margin:8px 0 0 0; padding-inline-start:18px; color:#d1c3ff;">
+            <li>بوابة دفع (محفظة إلكترونية أو تحويل بنكي).</li>
+            <li>نظام باكند أو Firebase لتسجيل الطلبات وتنفيذ الشحن.</li>
+            <li>آلية تحقق UID وتسليم الجواهر من مزود الشحن.</li>
+        </li>
+        </ol>
+    </div>
+</section>
+
+<!-- ===== تواصل ===== -->
+<section id="contact">
+    <h3><i class="fa-solid fa-envelope"></i> تواصل معي</h3>
+    <input type="text" placeholder="اسمك">
+    <input type="email" placeholder="بريدك الإلكتروني">
+    <textarea rows="5" placeholder="اكتب رسالتك..."></textarea>
+    <button class="send">إرسال</button>
+</section>
+
+<footer>
+    © جميع الحقوق محفوظة | بهاء الدين – 2025
+</footer>
+
+<!-- ===== مودال الشراء ===== -->
+<div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h4 id="modalTitle"><i class="fa-solid fa-gift"></i> إتمام الشراء</h4>
+
+        <div style="margin-bottom:8px; color:#eee;" id="selectedPackInfo">إختر باقة...</div>
+
+        <label for="uidInput">UID اللاعب (الرقم)</label>
+        <input id="uidInput" type="text" placeholder="أدخل UID (مثال: 123456789)">
+
+        <label for="playerName">اسم اللاعب (اختياري)</label>
+        <input id="playerName" type="text" placeholder="مثال: BahaPlayer">
+
+        <label for="paymentMethod">طريقة الدفع</label>
+        <select id="paymentMethod">
+            <option value="">--- اختر وسيلة الدفع ---</option>
+            <option value="bank">تحويل بنكي</option>
+            <option value="mobile">محفظة إلكترونية</option>
+            <option value="cash">دفع كاش (في المنطقة)</option>
+        </select>
+
+        <div style="margin-top:10px; font-size:13px; color:#cfc3ff;">
+            تأكد من إدخال الـ UID الصحيح ليتم شحن الجواهر لحسابك فوراً بعد التحقق.
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">إلغاء</button>
+            <a href="https://wa.me/249117449607" class="btn-confirm" id="confirmPurchaseBtn">تأكيد الشراء</a>
+        </div>
+    </div>
+</div>
+
+<script src="purchase.js"></script>
+</body>
+</html>

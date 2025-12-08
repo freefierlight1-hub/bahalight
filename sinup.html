@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إنشاء حساب</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+    --purple:#a259ff;
+    --purple-light:#c77dff;
+    --dark:#0a0014;
+    --card:#120020;
+    --text:#ffffff;
+}
+body{
+    margin:0;
+    font-family:'Cairo',sans-serif;
+    background:var(--dark);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.signup-box{
+    width:90%;
+    max-width:420px;
+    background:var(--card);
+    padding:40px 30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(162,89,255,0.2);
+    text-align:center;
+}
+.signup-box h2{
+    color:var(--purple-light);
+    margin-bottom:20px;
+}
+.input-group{
+    margin-bottom:18px;
+    text-align:right;
+    position:relative;
+}
+.input-group label{
+    display:block;
+    font-size:14px;
+    margin-bottom:6px;
+    color:#ccc;
+}
+.input-group input{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border-radius:8px;
+    border:1px solid rgba(162,89,255,0.2);
+    background:rgba(18,0,30,0.5);
+    color:var(--text);
+    font-size:15px;
+    outline:none;
+}
+.input-group input:focus{
+    border-color:var(--purple-light);
+    box-shadow:0 0 10px var(--purple-light);
+}
+.icon-input{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#cfc3ff;
+}
+.signup-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:var(--purple);
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 0 12px var(--purple);
+}
+.signup-btn:hover{
+    background:var(--purple-light);
+    transform:scale(1.03);
+}
+.login-link{
+    margin-top:15px;
+    font-size:14px;
+    color:#ccc;
+}
+.login-link a{
+    color:var(--purple-light);
+    text-decoration:none;
+    font-weight:600;
+}
+.error-msg{
+    background:rgba(255,0,0,0.1);
+    color:#ffb4b4;
+    padding:8px;
+    margin-bottom:12px;
+    border-radius:8px;
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="signup-box">
+    <h2><i class="fa-solid fa-user-plus"></i> إنشاء حساب</h2>
+
+    <div id="errorBox" class="error-msg"></div>
+
+    <div class="input-group">
+        <i class="fa-solid fa-user icon-input"></i>
+        <label>الاسم الكامل</label>
+        <input id="fullName" type="text" placeholder="أدخل اسمك">
+    </div>
+
+    <div class="input-group">
+        <i class="fa-solid fa-envelope icon-input"></i>
+        <label>البريد الإلكتروني</label>
+        <input id="email" type="email" placeholder="example@email.com">
+    </div>
+
+    <div class="input-group">
+        <i class="fa-solid fa-lock icon-input"></i>
+        <label>كلمة المرور</label>
+        <input id="password" type="password" placeholder="•••••••">
+    </div>
+
+    <div class="input-group">
+        <i class="fa-solid fa-lock icon-input"></i>
+        <label>إعادة كلمة المرور</label>
+        <input id="confirmPassword" type="password" placeholder="•••••••">
+    </div>
+
+    <button class="signup-btn" id="signupBtn">إنشاء حساب</button>
+
+    <p class="login-link">لديك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-auth.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB91YyLJuX55E5nKt0TTGWP5WSIM_rsD2c",
+  authDomain: "light-cbb34.firebaseapp.com",
+  databaseURL: "https://light-cbb34-default-rtdb.firebaseio.com",
+  projectId: "light-cbb34",
+  storageBucket: "light-cbb34.appspot.com",
+  messagingSenderId: "328390431792",
+  appId: "1:328390431792:web:d2b47546e977d0f65f89f5",
+  measurementId: "G-LEQ8ECZYWL"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+const signupBtn = document.getElementById('signupBtn');
+const fullName = document.getElementById('fullName');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirmPassword');
+const errorBox = document.getElementById('errorBox');
+
+signupBtn.addEventListener('click', async ()=>{
+  errorBox.style.display = "none";
+  const name = fullName.value.trim();
+  const mail = email.value.trim();
+  const pass = password.value;
+  const confirmPass = confirmPassword.value;
+
+  if(!name || !mail || !pass || !confirmPass){
+    return showError("الرجاء ملء جميع الحقول.");
+  }
+  if(pass !== confirmPass){
+    return showError("كلمة المرور وإعادة كلمة المرور غير متطابقة.");
+  }
+  if(pass.length < 6){
+    return showError("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
+  }
+
+  try{
+    // إنشاء مستخدم في Firebase Auth
+    const userCredential = await createUserWithEmailAndPassword(auth, mail, pass);
+    await updateProfile(userCredential.user, { displayName: name });
+
+    // حفظ الاسم والبريد في Realtime Database
+    await set(ref(db, 'users/' + userCredential.user.uid), {
+      name: name,
+      email: mail,
+      createdAt: new Date().toISOString()
+    });
+
+    // تحويل المستخدم مباشرة للصفحة الرئيسية
+    window.location.href = "index.html";
+  }catch(error){
+    showError(error.message);
+  }
+});
+
+function showError(msg){
+  errorBox.style.display = "block";
+  errorBox.textContent = msg;
+}
+</script>
+
+</body>
+</html>
